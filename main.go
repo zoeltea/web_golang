@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -35,7 +34,8 @@ func main() {
 	fe.HomeRoutes()
 	fe.AccountRoutes()
 
-	port := os.Getenv("SERVER_PORT")
+	// port := os.Getenv("SERVER_PORT")
+	port := "8080"
 	if port == "" {
 		port = "8080"
 	}
