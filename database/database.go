@@ -11,7 +11,7 @@ import (
 
 func InitDB() (*sql.DB, error) {
 	connStr := fmt.Sprintf(
-		"host=postgresql port=58393 user=postgres password=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW dbname=railway sslmode=disable",
+		"host=postgres.railway.internal port=58393 user=postgres password=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW dbname=railway sslmode=disable",
 		// "host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		// os.Getenv("DB_HOST"),
 		// os.Getenv("DB_PORT"),
