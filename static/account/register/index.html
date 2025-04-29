@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Account</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Register New Account</h1>
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nik">NIK:</label>
+                <input type="text" id="nik" name="nik" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="no_hp">Phone Number:</label>
+                <input type="text" id="no_hp" name="no_hp" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="no_rekening">Account Number:</label>
+                <input type="text" id="no_rekening" name="no_rekening" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="balance">Initial Balance:</label>
+                <input type="number" id="balance" name="balance" step="0.01" value="0.00">
+            </div>
+            
+            <button type="submit">Register Account</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                nik: document.getElementById('nik').value,
+                no_hp: document.getElementById('no_hp').value,
+                no_rekening: document.getElementById('no_rekening').value,
+                balance: parseFloat(document.getElementById('balance').value)
+            };
+
+            fetch('/api/accounts/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('message').innerHTML = `
+                    <div class="success">
+                        Account created successfully! ID: ${data.id}
+                    </div>
+                `;
+                // Clear form
+                document.getElementById('registration-form').reset();
+            })
+            .catch(error => {
+                document.getElementById('message').innerHTML = `
+                    <div class="error">
+                        Error: ${error.message || 'Failed to create account'}
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

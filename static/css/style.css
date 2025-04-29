@@ -57,3 +57,59 @@ table tbody tr:hover {
     background-color: #e1f5fe;
     cursor: pointer;
 }
+
+/* Registration Form Styles */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.success {
+    color: green;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #ddffdd;
+    border: 1px solid green;
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #ffdddd;
+    border: 1px solid red;
+    border-radius: 4px;
+}
