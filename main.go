@@ -1,12 +1,27 @@
-package main // Setiap program Go harus dimulai dengan deklarasi package
+package main
 
-import "fmt" // Import package "fmt" untuk input/output (seperti printf/println)
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hallo dunia manca negara!")
+}
 
 func main() {
-	fmt.Println("hello duniaaa")
-	// Load .env file
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error loading .env file")
-	// }
+	port := "8080"
+	if port == "" {
+		port = "8080"
+	}
+
+	http.HandleFunc("/", handler)
+
+	fmt.Println("Server berjalan...")
+	fmt.Printf("Server mendengarkan pada port %s\n", port)
+
+	err := http.ListenAndServe(":"+port, nil)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 }
