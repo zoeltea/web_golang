@@ -3,21 +3,23 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq"
 )
 
 // postgresql://postgres:caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW@turntable.proxy.rlwy.net:58393/railway
+// PGPASSWORD=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW psql -h turntable.proxy.rlwy.net -U postgres -p 58393 -d railway
 
 func InitDB() (*sql.DB, error) {
 	connStr := fmt.Sprintf(
-		"host=postgres.railway.internal port=58393 user=postgres password=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW dbname=railway sslmode=disable",
-		// "host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		// os.Getenv("DB_HOST"),
-		// os.Getenv("DB_PORT"),
-		// os.Getenv("DB_USER"),
-		// os.Getenv("DB_PASSWORD"),
-		// os.Getenv("DB_NAME"),
+		// "host=${{ Postgres.DATABASE_URL }} port=5432 user=postgres password=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW dbname=railway sslmode=disable",
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("PGHOST"),
+		os.Getenv("PGPORT"),
+		os.Getenv("PGUSER"),
+		os.Getenv("PGPASSWORD"),
+		os.Getenv("PGDATABASE"),
 	)
 
 	db, err := sql.Open("postgres", connStr)
