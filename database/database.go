@@ -12,6 +12,12 @@ import (
 // PGPASSWORD=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW psql -h turntable.proxy.rlwy.net -U postgres -p 58393 -d railway
 
 func InitDB() (*sql.DB, error) {
+
+	fmt.Println("host: ", os.Getenv("PGHOST"))
+	fmt.Println("port: ", os.Getenv("PGPORT"))
+	fmt.Println("user: ", os.Getenv("PGUSER"))
+	fmt.Println("password: ", os.Getenv("PGPASSWORD"))
+	fmt.Println("host: databasename", os.Getenv("PGDATABASE"))
 	connStr := fmt.Sprintf(
 		// "host=${{ Postgres.DATABASE_URL }} port=5432 user=postgres password=caEMpPeMZlEpOwMsGZzIbXouhpTfKGpW dbname=railway sslmode=disable",
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
